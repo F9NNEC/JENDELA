@@ -15,6 +15,22 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link href="{{ route('books.index') }}" :active="request()->routeIs('books.*')">
+                        {{ __('Books') }}
+                    </x-nav-link>
+
+                    @if(auth()->check() && ! auth()->user()->isAdmin())
+                        <x-nav-link href="{{ route('borrows.index') }}" :active="request()->routeIs('borrows.*')">
+                            {{ __('My Borrow & History') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if(auth()->check() && auth()->user()->isAdmin())
+                        <x-nav-link href="{{ route('admin.borrows.index') }}" :active="request()->routeIs('admin.borrows.*')">
+                            {{ __('All Borrow History and Transactions') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -142,6 +158,22 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link href="{{ route('books.index') }}" :active="request()->routeIs('books.*')">
+                {{ __('Books') }}
+            </x-responsive-nav-link>
+
+            @if(auth()->check() && ! auth()->user()->isAdmin())
+                <x-responsive-nav-link href="{{ route('borrows.index') }}" :active="request()->routeIs('borrows.*')">
+                    {{ __('My Borrow & History') }}
+                </x-responsive-nav-link>
+            @endif
+
+            @if(auth()->check() && auth()->user()->isAdmin())
+                <x-responsive-nav-link href="{{ route('admin.borrows.index') }}" :active="request()->routeIs('admin.borrows.*')">
+                    {{ __('Admin Borrows') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
