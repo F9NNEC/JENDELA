@@ -35,8 +35,12 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $b->returned_at?->format('Y-m-d') ?? '-' }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @if($b->returned_at)
-                                        <span class="text-green-600 font-semibold">Returned</span>
-                                    @elseif(now()->gt($b->due_at))
+                                        @if($b->returned_late)
+                                            <span class="text-red-600 font-semibold">Returned Overdue</span>
+                                        @else
+                                            <span class="text-green-600 font-semibold">Returned</span>
+                                        @endif
+                                    @elseif($b->is_overdue)
                                         <span class="text-red-600 font-semibold">Overdue</span>
                                     @else
                                         <span class="text-yellow-600 font-semibold">Borrowed</span>

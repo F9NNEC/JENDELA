@@ -103,6 +103,7 @@ class BookController extends Controller
             return redirect()->route('books.index')->with('error', 'Tidak ada stok buku tersedia.');
         }
 
+
         // prevent duplicate active borrow for same book
         if ($user->borrows()->where('book_id', $book->id)->whereNull('returned_at')->exists()) {
             return redirect()->route('books.index')->with('error', 'Anda sudah meminjam buku ini.');
@@ -112,7 +113,7 @@ class BookController extends Controller
             'user_id' => $user->id,
             'book_id' => $book->id,
             'borrowed_at' => now(),
-            'due_at' => now()->addDays(14),
+            'due_at' => now()->addDays(3), // 3 days to return
         ]);
 
         $book->decrement('available');
