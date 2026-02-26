@@ -41,6 +41,7 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'isbn' => 'nullable|string|max:100|unique:books,isbn',
             'available' => 'required|integer|min:0',
+            'cover_url' => 'nullable|url|max:2048',
         ]);
 
         Book::create($data);
@@ -68,6 +69,7 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'isbn' => 'nullable|string|max:100|unique:books,isbn,' . $book->id,
             'available' => 'required|integer|min:0',
+            'cover_url' => 'nullable|url|max:2048',
         ]);
 
         $book->update($data);

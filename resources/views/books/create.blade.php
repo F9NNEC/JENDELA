@@ -33,6 +33,12 @@
                         @error('available')<div class="text-sm text-red-600">{{ $message }}</div>@enderror
                     </div>
 
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700">Cover URL</label>
+                        <input name="cover_url" value="{{ old('cover_url') }}" class="mt-1 block w-full border-gray-300 rounded-md" placeholder="https://example.com/image.jpg">
+                        @error('cover_url')<div class="text-sm text-red-600">{{ $message }}</div>@enderror
+                    </div>
+
                     <div class="flex items-center gap-2">
                         <button class="px-4 py-2 bg-blue-600 text-white rounded">Simpan</button>
                         <a href="{{ route('books.index') }}" class="px-4 py-2 border rounded">Batal</a>
