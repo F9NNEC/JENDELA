@@ -29,7 +29,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $b->book->author }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $b->borrowed_at->format('Y-m-d') }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    @if(now()->gt($b->due_at))
+                                    @if($b->is_overdue)
                                         <span class="text-red-600 font-semibold">Overdue</span>
                                     @else
                                         <span class="text-green-600 font-semibold">Borrowed</span>
@@ -67,8 +67,8 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $h->borrowed_at->format('Y-m-d') }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $h->returned_at?->format('Y-m-d') ?? '-' }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($h->returned_at->greaterThan($h->due_at))
-                                        <span class="text-red-600 font-semibold">Returned overdue</span>
+                                    @if($h->returned_late)
+                                        <span class="text-red-600 font-semibold">Returned Overdue</span>
                                     @else
                                         <span class="text-green-600 font-semibold">Returned</span>
                                     @endif
