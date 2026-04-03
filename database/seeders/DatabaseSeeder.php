@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
 
         // contoh data buku (opsional)
         DB::table('books')->insert([
-            ['title' => 'Clean Code', 'author' => 'Robert C. Martin', 'isbn' => '9780132350884', 'available' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['title' => 'The Pragmatic Programmer', 'author' => 'Andrew Hunt', 'isbn' => '9780201616224', 'available' => 2, 'created_at' => now(), 'updated_at' => now()],
+            ['title' => 'Clean Code', 'author' => 'Robert C. Martin', 'isbn' => '9780132350884', 'available' => 3, 'pdf_path' => 'books/sample.pdf', 'created_at' => now(), 'updated_at' => now()],
+            ['title' => 'The Pragmatic Programmer', 'author' => 'Andrew Hunt', 'isbn' => '9780201616224', 'available' => 2, 'pdf_path' => null, 'created_at' => now(), 'updated_at' => now()],
         ]);
 
         // contoh peminjaman untuk user test

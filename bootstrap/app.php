@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'user.only' => \App\Http\Middleware\UserOnly::class,
             'admin.only' => \App\Http\Middleware\AdminOnly::class,
+            'pdf.access.limit' => \App\Http\Middleware\PdfAccessLimit::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

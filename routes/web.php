@@ -38,6 +38,8 @@ Route::middleware([
     // My borrows / history (user only)
     Route::get('/my-borrows', [\App\Http\Controllers\BorrowController::class, 'index'])->middleware('user.only')->name('borrows.index');
     Route::post('/borrows/{borrow}/return', [\App\Http\Controllers\BorrowController::class, 'returnBorrow'])->middleware('user.only')->name('borrows.return');
+    Route::get('/books/{book}/read', [\App\Http\Controllers\BookController::class, 'read'])->middleware('user.only')->name('books.read');
+    Route::get('/books/{book}/pdf', [\App\Http\Controllers\BookController::class, 'servePdf'])->middleware('user.only')->name('books.pdf');
 
     // Admin - all borrows
     Route::get('/admin/borrows', [\App\Http\Controllers\BorrowController::class, 'adminIndex'])->middleware('admin.only')->name('admin.borrows.index');

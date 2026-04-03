@@ -36,6 +36,9 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right">
+                                    @if($b->book->pdf_path)
+                                        <a href="{{ route('books.read', $b->book) }}" class="px-3 py-1 text-sm bg-green-600 text-white rounded mr-2">Read</a>
+                                    @endif
                                     <form action="{{ route('borrows.return', $b) }}" method="POST" class="inline-block">
                                         @csrf
                                         <button class="px-3 py-1 text-sm bg-blue-600 text-white rounded">Return</button>
