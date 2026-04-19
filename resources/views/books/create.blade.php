@@ -6,7 +6,7 @@
     <div class="py-6">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <form method="POST" action="{{ route('books.store') }}">
+                <form method="POST" action="{{ route('books.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-4">
@@ -37,6 +37,12 @@
                         <label class="block text-sm font-medium text-gray-700">Cover URL</label>
                         <input name="cover_url" value="{{ old('cover_url') }}" class="mt-1 block w-full border-gray-300 rounded-md" placeholder="https://example.com/image.jpg">
                         @error('cover_url')<div class="text-sm text-red-600">{{ $message }}</div>@enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700">PDF File</label>
+                        <input type="file" name="pdf_file" accept=".pdf" class="mt-1 block w-full border-gray-300 rounded-md">
+                        @error('pdf_file')<div class="text-sm text-red-600">{{ $message }}</div>@enderror
                     </div>
 
                     <div class="flex items-center gap-2">

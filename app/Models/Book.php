@@ -15,6 +15,7 @@ class Book extends Model
         'isbn',
         'available',
         'cover_url',
+        'pdf_path',
     ];
 
     public function borrows()
