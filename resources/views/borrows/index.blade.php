@@ -7,7 +7,7 @@
                     <div class="mb-4 text-green-600">{{ session('success') }}</div>
                 @endif
 
-                <h3 class="text-lg font-medium mb-4">My Borrowing</h3>
+                <h3 class="text-lg font-medium mb-4">My borrow</h3>
                 @if($myBorrows->count() > 0)
                     <div class="grid grid-cols-5 gap-3 mb-8">
                         @foreach($myBorrows as $b)
