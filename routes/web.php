@@ -6,18 +6,18 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CarouselController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
+
+// Public routes (untuk guest dan authenticated users)
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    // Buku - listing & actions
-    Route::get('/books', [BookController::class, 'index'])->name('books.index');
     Route::get('/books/create', [BookController::class, 'create'])->middleware('admin.only')->name('books.create');
     Route::post('/books', [BookController::class, 'store'])->middleware('admin.only')->name('books.store');
     Route::get('/books/{book}/edit', [BookController::class, 'edit'])->middleware('admin.only')->name('books.edit');

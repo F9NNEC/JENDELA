@@ -17,7 +17,7 @@
                     </x-nav-link>
 
                     <x-nav-link href="{{ route('books.index') }}" :active="request()->routeIs('books.*')">
-                        {{ __('Books') }}
+                        {{ __('Booklist') }}
                     </x-nav-link>
 
                     @if(auth()->check() && ! auth()->user()->isAdmin())
@@ -36,7 +36,7 @@
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Teams Dropdown -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures() && auth()->check())
                     <div class="ms-3 relative">
                         <x-dropdown align="right" width="60">
                             <x-slot name="trigger">
@@ -88,7 +88,8 @@
                 @endif
 
                 <!-- Settings Dropdown -->
-                <div class="ms-3 relative">
+                @if(auth()->check())
+                    <div class="ms-3 relative">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -137,7 +138,18 @@
                             </form>
                         </x-slot>
                     </x-dropdown>
-                </div>
+                    </div>
+                @else
+                    <!-- Guest User - Login/Register Buttons -->
+                    <div class="flex gap-2 items-center">
+                        <a href="{{ route('login') }}" class="px-4 py-2 text-gray-600 hover:text-gray-900 font-medium text-sm">
+                            Login
+                        </a>
+                        <a href="{{ route('register') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 font-medium text-sm">
+                            Register
+                        </a>
+                    </div>
+                @endif
             </div>
 
             <!-- Hamburger -->
@@ -177,6 +189,7 @@
         </div>
 
         <!-- Responsive Settings Options -->
+        @if(auth()->check())
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -247,5 +260,18 @@
                 @endif
             </div>
         </div>
+        @else
+        <!-- Guest User - Login/Register Buttons (Responsive) -->
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="space-y-1">
+                <a href="{{ route('login') }}" class="block px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-medium text-sm">
+                    Login
+                </a>
+                <a href="{{ route('register') }}" class="block px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 font-medium text-sm">
+                    Register
+                </a>
+            </div>
+        </div>
+        @endif
     </div>
 </nav>

@@ -1,16 +1,15 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Dashboard') }}
-            </h2>
-            @if(auth()->user()->role === 'admin')
-                <a href="{{ route('carousels.index') }}" class="px-4 py-2 bg-blue-600 text-white rounded text-sm">
-                    Kelola Carousel
-                </a>
-            @endif
-        </div>
-    </x-slot>
+    @if(auth()->check() && auth()->user()->role === 'admin')
+        <x-slot name="header">
+            <div class="flex justify-between items-center">
+                <div class="ms-auto">
+                            <a href="{{ route('carousels.index') }}" class="px-4 py-2 bg-blue-600 text-white rounded text-sm">
+                                Manage Carousels
+                            </a>
+                </div>
+            </div>
+            </x-slot>
+        @endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -69,7 +68,7 @@
 
             <!-- Books Grid Section -->
             <div>
-                <h3 class="text-xl font-bold mb-4 text-gray-800">Koleksi Buku</h3>
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Book List</h3>
                 @if($books->count() > 0)
                     <div class="grid grid-cols-5 gap-3">
                         @foreach($books as $book)
@@ -95,28 +94,34 @@
                                     <!-- Availability Badge -->
                                     <div class="mb-2">
                                         @if($book->available > 0)
-                                            <span class="inline-block px-2 py-0.5 bg-green-100 text-green-800 text-xs font-semibold rounded-full">Tersedia</span>
+                                            <span class="inline-block px-2 py-0.5 bg-green-100 text-green-800 text-xs font-semibold rounded-full">Available</span>
                                         @else
-                                            <span class="inline-block px-2 py-0.5 bg-red-100 text-red-800 text-xs font-semibold rounded-full">Habis</span>
+                                            <span class="inline-block px-2 py-0.5 bg-red-100 text-red-800 text-xs font-semibold rounded-full">Out of Stock</span>
                                         @endif
                                     </div>
 
                                     <!-- Action Button -->
-                                    @if(auth()->check() && auth()->user()->role === 'user' && $book->available > 0)
-                                        <form action="{{ route('books.borrow', $book) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="w-full px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-xs font-semibold">
-                                                Pinjam
-                                            </button>
-                                        </form>
-                                    @elseif(auth()->check() && auth()->user()->role === 'admin')
+                                    @if(auth()->check() && auth()->user()->role === 'admin')
                                         <a href="{{ route('books.edit', $book) }}" class="block w-full px-2 py-1 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition text-xs font-semibold text-center">
                                             Edit
                                         </a>
+                                    @elseif(auth()->check() && auth()->user()->role === 'user')
+                                        @if($book->available > 0)
+                                            <form action="{{ route('books.borrow', $book) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="w-full px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-xs font-semibold">
+                                                    Borrow
+                                                </button>
+                                            </form>
+                                        @else
+                                            <button disabled class="w-full px-2 py-1 bg-gray-300 text-gray-600 rounded text-xs font-semibold cursor-not-allowed">
+                                                Out of Stock
+                                            </button>
+                                        @endif
                                     @else
-                                        <button disabled class="w-full px-2 py-1 bg-gray-300 text-gray-600 rounded text-xs font-semibold cursor-not-allowed">
+                                        <a href="{{ route('login') }}" class="block w-full px-2 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 transition text-xs font-semibold text-center">
                                             Login
-                                        </button>
+                                        </a>
                                     @endif
                                 </div>
                             </div>
@@ -124,7 +129,7 @@
                     </div>
                 @else
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-center">
-                        <p class="text-gray-600">Belum ada buku tersedia.</p>
+                        <p class="text-gray-600">No books available yet.</p>
                     </div>
                 @endif
             </div>

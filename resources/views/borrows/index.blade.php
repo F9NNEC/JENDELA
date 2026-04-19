@@ -1,7 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('My borrow and history') }}</h2>
-    </x-slot>
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -10,7 +7,7 @@
                     <div class="mb-4 text-green-600">{{ session('success') }}</div>
                 @endif
 
-                <h3 class="text-lg font-medium mb-4">My borrow</h3>
+                <h3 class="text-lg font-medium mb-4">My Borrowing</h3>
                 @if($myBorrows->count() > 0)
                     <div class="grid grid-cols-5 gap-3 mb-8">
                         @foreach($myBorrows as $b)
@@ -68,7 +65,7 @@
                     </div>
                 @else
                     <div class="bg-gray-50 rounded-lg p-6 text-center mb-8">
-                        <p class="text-gray-600">Anda belum meminjam buku apapun.</p>
+                        <p class="text-gray-600">You haven't borrowed any books yet.</p>
                     </div>
                 @endif
 

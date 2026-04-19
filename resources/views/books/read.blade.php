@@ -6,7 +6,7 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <div class="mb-4 p-3 rounded border border-gray-300 bg-yellow-50 text-gray-700">Silakan membaca buku dalam jendela di bawah. File PDF terbatas untuk periode peminjaman 3 hari.</div>
+                <div class="mb-4 p-3 rounded border border-gray-300 bg-yellow-50 text-gray-700">PDF file is limited to the 3-day borrowing period.</div>
                 <div class="flex gap-2 mb-4">
                     <a href="{{ route('borrows.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded">Back to My Borrows</a>
                 </div>

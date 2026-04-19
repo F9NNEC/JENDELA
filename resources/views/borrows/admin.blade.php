@@ -1,8 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Admin - All Borrows') }}</h2>
-    </x-slot>
-
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
@@ -21,7 +17,6 @@
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Due date</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Returned at</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                            <th class="px-6 py-3"></th>
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -44,14 +39,6 @@
                                         <span class="text-red-600 font-semibold">Overdue</span>
                                     @else
                                         <span class="text-yellow-600 font-semibold">Borrowed</span>
-                                    @endif
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right">
-                                    @if(!$b->returned_at)
-                                        <form action="{{ route('borrows.return', $b) }}" method="POST" class="inline-block">
-                                            @csrf
-                                            <button class="px-3 py-1 text-sm bg-blue-600 text-white rounded">Mark as returned</button>
-                                        </form>
                                     @endif
                                 </td>
                             </tr>
