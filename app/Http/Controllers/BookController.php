@@ -9,9 +9,21 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::orderBy('title')->paginate(15);
+        $query = Book::orderBy('title');
+        
+        // Handle search
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function($q) use ($search) {
+                $q->where('isbn', 'LIKE', '%' . $search . '%')
+                  ->orWhere('author', 'LIKE', '%' . $search . '%')
+                  ->orWhere('title', 'LIKE', '%' . $search . '%');
+            });
+        }
+        
+        $books = $query->paginate(15);
 
         $userBorrowedBookIds = [];
         if (Auth::check()) {
