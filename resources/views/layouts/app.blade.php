@@ -17,7 +17,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <body class="font-sans antialiased bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         <x-banner />
 
         <div class="min-h-screen">
