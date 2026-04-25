@@ -17,8 +17,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body>
-        <div class="font-sans text-gray-900 antialiased">
+    <body class="font-sans text-gray-900 antialiased bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
             {{ $slot }}
         </div>
 
