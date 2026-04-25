@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Tambah Buku') }}</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Add Book') }}</h2>
     </x-slot>
 
     <div class="py-6">
@@ -46,8 +46,8 @@
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <button class="px-4 py-2 bg-blue-600 text-white rounded">Simpan</button>
-                        <a href="{{ route('books.index') }}" class="px-4 py-2 border rounded">Batal</a>
+                        <button class="px-4 py-2 bg-blue-600 text-white rounded">Save</button>
+                        <a href="{{ route('books.index') }}" class="px-4 py-2 border rounded">Cancel</a>
                     </div>
                 </form>
             </div>

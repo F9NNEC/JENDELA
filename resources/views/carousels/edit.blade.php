@@ -13,7 +13,7 @@
                     <!-- Order Field -->
                     <div class="mb-6">
                         <label for="order" class="block text-sm font-medium text-gray-700 mb-2">
-                            Urutan (Order)
+                            Order
                         </label>
                         <input type="number" id="order" name="order" value="{{ old('order', $carousel->order) }}"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
@@ -27,7 +27,7 @@
                         <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
                             Title
                         </label>
-                        <input type="text" id="title" name="title" value="{{ old('title', $carousel->title) }}" placeholder="Masukkan title carousel"
+                        <input type="text" id="title" name="title" value="{{ old('title', $carousel->title) }}" placeholder="Enter carousel title"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         @error('title')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -37,7 +37,7 @@
                     <!-- Image URL Field -->
                     <div class="mb-6">
                         <label for="image_url" class="block text-sm font-medium text-gray-700 mb-2">
-                            URL Gambar <span class="text-red-600">*</span>
+                            Image URL <span class="text-red-600">*</span>
                         </label>
                         <input type="url" id="image_url" name="image_url" value="{{ old('image_url', $carousel->image_url) }}" 
                                placeholder="https://example.com/image.jpg" required
@@ -56,9 +56,9 @@
                     <!-- Description Field -->
                     <div class="mb-6">
                         <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
-                            Deskripsi
+                            Description
                         </label>
-                        <textarea id="description" name="description" rows="4" placeholder="Masukkan deskripsi carousel"
+                        <textarea id="description" name="description" rows="4" placeholder="Enter carousel description"
                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">{{ old('description', $carousel->description) }}</textarea>
                         @error('description')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -70,7 +70,7 @@
                         <label class="flex items-center">
                             <input type="checkbox" id="active" name="active" value="1" {{ old('active', $carousel->active) ? 'checked' : '' }}
                                    class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                            <span class="ml-3 text-sm text-gray-700">Aktif</span>
+                            <span class="ml-3 text-sm text-gray-700">Active</span>
                         </label>
                         @error('active')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -80,10 +80,10 @@
                     <!-- Submit Button -->
                     <div class="flex gap-4">
                         <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold">
-                            Perbarui
+                            Update
                         </button>
                         <a href="{{ route('carousels.index') }}" class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition font-semibold">
-                            Batal
+                            Cancel
                         </a>
                     </div>
                 </form>

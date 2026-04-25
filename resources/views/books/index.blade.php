@@ -1,7 +1,5 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Buku') }}</h2>
-    </x-slot>
+
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -14,10 +12,10 @@
                 @endif
 
                 <div class="flex justify-between items-center mb-4">
-                    <div class="text-lg font-medium">Daftar Buku</div>
+                    <div class="text-lg font-medium">Book List</div>
 
                     @if(auth()->user() && auth()->user()->isAdmin())
-                        <a href="{{ route('books.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded">Tambah Buku</a>
+                        <a href="{{ route('books.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded">Add Book</a>
                     @endif
                 </div>
 
@@ -51,22 +49,26 @@
                                     @if(auth()->user() && auth()->user()->isAdmin())
                                         <a href="{{ route('books.edit', $book) }}" class="inline-block px-3 py-1 text-sm bg-yellow-400 text-black rounded">Edit</a>
 
-                                        <form action="{{ route('books.destroy', $book) }}" method="POST" class="inline-block" onsubmit="return confirm('Hapus buku ini?');">
+                                        <form action="{{ route('books.destroy', $book) }}" method="POST" class="inline-block" onsubmit="return confirm('Delete this book?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="inline-block px-3 py-1 text-sm bg-red-600 text-white rounded">Delete</button>
                                         </form>
-                                    @else
+                                    @elseif(auth()->check())
                                         @if(in_array($book->id, $userBorrowedBookIds ?? []))
                                             <span class="inline-block px-3 py-1 text-sm bg-gray-300 text-gray-700 rounded">Borrowed</span>
                                         @else
                                             <form action="{{ route('books.borrow', $book) }}" method="POST" class="inline-block">
                                                 @csrf
-                                                <button type="submit" class="inline-flex px-3 py-1 text-sm bg-gray-300 text-blue-700 rounded" @if($book->available < 1) disabled @endif>
+                                                <button type="submit" class="inline-flex px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700" @if($book->available < 1) disabled @endif>
                                                     {{ $book->available > 0 ? 'Borrow' : 'Out' }}
                                                 </button>
                                             </form>
                                         @endif
+                                    @else
+                                        <a href="{{ route('login') }}" class="inline-flex px-3 py-1 text-sm bg-gray-600 text-white rounded hover:bg-gray-700">
+                                            Login to Borrow
+                                        </a>
                                     @endif
                                 </td>
                             </tr>
