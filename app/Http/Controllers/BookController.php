@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Borrow;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -93,7 +95,7 @@ class BookController extends Controller
         if ($request->hasFile('pdf_file')) {
             // Delete old file if exists
             if ($book->pdf_path) {
-                \Storage::disk('private')->delete($book->pdf_path);
+                Storage::disk('private')->delete($book->pdf_path);
             }
             $data['pdf_path'] = $request->file('pdf_file')->store('books', 'private');
         }
@@ -111,7 +113,7 @@ class BookController extends Controller
 
         // Delete PDF file if exists
         if ($book->pdf_path) {
-            \Storage::disk('private')->delete($book->pdf_path);
+            Storage::disk('private')->delete($book->pdf_path);
         }
 
         $book->delete();
@@ -170,7 +172,7 @@ class BookController extends Controller
             return redirect()->back()->with('error', 'PDF file not available for this book.');
         }
 
-        $disk = \Storage::disk('private');
+        $disk = Storage::disk('private');
         if (! $disk->exists($book->pdf_path)) {
             return redirect()->back()->with('error', 'PDF file not found on server.');
         }
@@ -200,7 +202,7 @@ class BookController extends Controller
         }
 
         // Log access
-        \Log::info('PDF accessed', [
+        Log::info('PDF accessed', [
             'user_id' => $user->id,
             'user_email' => $user->email,
             'book_id' => $book->id,
@@ -209,7 +211,7 @@ class BookController extends Controller
             'user_agent' => request()->userAgent(),
         ]);
 
-        $disk = \Storage::disk('private');
+        $disk = Storage::disk('private');
 
         if (! $disk->exists($book->pdf_path)) {
             abort(404, 'PDF file not found.');
